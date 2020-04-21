@@ -28,17 +28,24 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ * Counter 1 has a nested-function and uses closure to return a function. 
+ * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
+ * Counter 1 uses closure to implement the count function, since count is defined in the function counterMaker, it doesn't reset to 0 everytime it is called and returns an ever-growing number. 
+ * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
- *
+ * 
+ *  Counter 1 will be preferable if you have multiple count variables and you don't want to rename them everytime. 
+ * Counter 2 would be fine if you just have the one and want it at the top of your program.
+ * 
 */
 
 // counter1 code
 function counterMaker() {
   let count = 0;
   return function counter() {
-    count++;
+    return count++;
   }
 }
 
@@ -56,12 +63,9 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
-
-    /*Code Here*/
-
+function inning(){
+  return Math.floor(Math.random() * 3);
 }
-
 /* Task 3: finalScore()
 
 Write a higher order function called `finalScore` that accepts the callback function `inning` (from above) and a number of innings and and returns the final score of the game in the form of an object.
@@ -76,11 +80,21 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+function finalScore(numInning, cb){
+  let homeScore = 0;
+  let awayScore = 0;
 
-  /*Code Here*/
+  for (let i = 0; i < numInning; i++) {
+    homeScore += cb();
+    awayScore += cb();
+  }
 
+  return {
+    "Home": homeScore,
+    "Away": awayScore
+  }
 }
+console.log(finalScore(8, inning));
 
 /* Task 4: 
 
@@ -104,8 +118,24 @@ and returns the score at each pont in the game, like so:
 
 Final Score: awayTeam - homeTeam */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(numInning, cb) {
+  let homeScore = 0;
+  let awayScore = 0;
+  let message = [];
+
+  for (let i = 1; i <= numInning; i++) {
+    if (i === 1){
+      message.push(`${[i]}st inning: Away Team: ${awayScore += cb()} Home Team: ${awayScore += cb()}`);
+    } else if (i === 2) {
+       message.push(`${[i]}nd inning: Away Team: ${awayScore += cb()} Home Team: ${awayScore += cb()}`);
+      } else if (i === 3) {
+        message.push(`${[i]}rd inning: Away Team: ${awayScore += cb()} Home Team: ${awayScore += cb()}`);
+      } else {
+        message.push(`${[i]}th inning: Away Team: ${awayScore += cb()} Home Team: ${awayScore += cb()}`);
+      }
+  }
+  return message;
 }
 
+console.log(scoreboard(9, inning));
 
