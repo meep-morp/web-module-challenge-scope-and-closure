@@ -1,14 +1,20 @@
 // 1. Predict the output of the code below and explain why this is the output using what you learned today. When you're ready for answers, view an explanation [here](https://www.coderbyte.com/algorithm/3-common-javascript-closure-questions
 
 //     ```js
-//     (function(){
-//       var a = b = 3;
-//     })();
-//     console.log("a defined? " + (typeof a !== 'undefined'));
-//     console.log("b defined? " + (typeof b !== 'undefined'));
+    (function(){
+      var a = b = 3;
+    })();
+    console.log("a defined? " + (typeof a !== 'undefined'));
+    console.log("b defined? " + (typeof b !== 'undefined'));
 //     ```
-    
 
+/*
+    a is undefined because the var keyword is assigned to b instead. It means: 
+    b = 3;
+    var a = b;
+    a is in block scope within the function, while b is in global scope and can be defined. 
+    If you ran the test inside the function both would return true. 
+*/ 
 
 
 
