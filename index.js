@@ -123,19 +123,61 @@ function scoreboard(numInning, cb) {
   let awayScore = 0;
   let message = [];
 
+
   for (let i = 1; i <= numInning; i++) {
     if (i === 1){
-      message.push(`${[i]}st inning: Away Team: ${awayScore += cb()} Home Team: ${awayScore += cb()}`);
+      message.push(`${[i]}st inning: ${awayScore += cb()} - ${homeScore += cb()}`);
     } else if (i === 2) {
-       message.push(`${[i]}nd inning: Away Team: ${awayScore += cb()} Home Team: ${awayScore += cb()}`);
+       message.push(`${[i]}nd inning: ${awayScore += cb()} - ${homeScore += cb()}`);
       } else if (i === 3) {
-        message.push(`${[i]}rd inning: Away Team: ${awayScore += cb()} Home Team: ${awayScore += cb()}`);
+        message.push(`${[i]}rd inning: ${awayScore += cb()} - ${homeScore += cb()}`);
       } else {
-        message.push(`${[i]}th inning: Away Team: ${awayScore += cb()} Home Team: ${awayScore += cb()}`);
+        message.push(`${[i]}th inning: ${awayScore += cb()} - ${homeScore += cb()}`);
       }
   }
+
+
+  message.push(`Final Score: ${awayScore} - ${homeScore}`);
   return message;
 }
 
-console.log(scoreboard(9, inning));
+// console.log(scoreboard(9, inning));
 
+const scoreBoardV2 = (numInning, cb) => {
+  let message = [];
+  let home = 0;
+  let away = 0;
+  const homeArr = [];
+  const awayArr = [];
+
+
+  for (let i = 1; i <= numInning; i++) {
+    home = cb();
+    away = cb();
+    homeArr.push(home);
+    awayArr.push(away);
+        if (i === 1){
+      message.push(`${[i]}st inning: ${away} - ${home}`);
+    } else if (i === 2) {
+       message.push(`${[i]}nd inning: ${away} - ${home}`);
+      } else if (i === 3) {
+        message.push(`${[i]}rd inning: ${away} - ${home}`);
+      } else {
+        message.push(`${[i]}th inning: ${away} - ${home}`);
+      };
+  }
+
+
+  const finalScoreHome = homeArr.reduce((sum, score) => {
+    return sum + score
+  },0);
+  const finalScoreAway = awayArr.reduce((sum, score) => {
+    return sum + score
+  },0)
+
+
+  message.push(`Final Score: ${finalScoreAway} - ${finalScoreHome}`);
+  return (message);
+}
+
+console.log(scoreBoardV2(9,inning));
